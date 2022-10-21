@@ -4,9 +4,8 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {AddInputMultiline} from '../components/AddSiteInputfield';
 import {DetailsInput} from '../components/DetailsInputField';
 import {useRoute} from '@react-navigation/native';
-import {useSelector} from 'react-redux';
 import {ResetBtn} from '../components/CustomButton';
-import {Formik, Field, validateYupSchema} from 'formik';
+import {Formik, Field} from 'formik';
 
 const Details = ({navigation}) => {
 

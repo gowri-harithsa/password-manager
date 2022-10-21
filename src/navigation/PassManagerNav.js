@@ -1,18 +1,9 @@
 import * as React from 'react';
-import {Text, View, Button} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Login from '../screens/SignUp';
 import Register from '../screens/SignIn';
 const Tab = createMaterialTopTabNavigator();
-const Stack = createNativeStackNavigator();
-
-const theme = {
-  colors: {
-    background: 'transparent',
-  },
-};
 
 const TabNav = () => {
   return (

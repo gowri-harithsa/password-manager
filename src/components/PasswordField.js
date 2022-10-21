@@ -1,11 +1,8 @@
 import React from 'react';
 import {
   View,
-  Text,
   StyleSheet,
-  Pressable,
   TextInput,
-  Image,
 } from 'react-native';
 
 const Password = ({placeholder, keyboardType}) => {

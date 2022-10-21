@@ -1,16 +1,15 @@
-import {React, useState} from 'react';
-import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native';
+import {React} from 'react';
+import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AddInputMultiline} from '../components/AddSiteInputfield';
 import {useRoute} from '@react-navigation/native';
 import {ResetBtn} from '../components/CustomButton';
 import {useDispatch} from 'react-redux';
 import {DetailsInput} from '../components/DetailsInputField';
-import {Formik, Field, validateYupSchema} from 'formik';
+import {Formik, Field} from 'formik';
 import {editSite} from '../redux/Reducer';
 
 const Edit = ({navigation}) => {
-  
   const route = useRoute();
   const dispatch = useDispatch();
   const siteid = route.params.siteData.id;

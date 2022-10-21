@@ -62,28 +62,28 @@ const AddSite = ({navigation}) => {
             placeholder={'Enter Site URL'}
             value={url}
             onChangeText={value => setURL(value)}
-            secureTextEntry="false"
+            secureTextEntry={false}
           />
           <AddSitesInput
             title="Site Name"
             placeholder={'Enter Site Name'}
             value={siteName}
             onChangeText={value => setsiteName(value)}
-            secureTextEntry="false"
+            secureTextEntry={false}
           />
           <AddSitesInput
             title="Sector/Folder"
             placeholder={'Enter folder Name'}
             value={folder}
             onChangeText={value => setFolder(value)}
-            secureTextEntry="false"
+            secureTextEntry={false}
           />
           <AddSitesInput
             title="User Name"
             placeholder={'Enter Username'}
             value={userName}
             onChangeText={value => setUserName(value)}
-            secureTextEntry="false"
+            secureTextEntry={false}
           />
           <AddSitesInput
             title="Site Password"

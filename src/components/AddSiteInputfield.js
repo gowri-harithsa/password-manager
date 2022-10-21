@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     color: '#949CA5',
     fontSize: 18,
     marginHorizontal: 20,
-    marginVertical: 30
+    marginVertical: 30,
   },
   textInput: {
     height: 41,

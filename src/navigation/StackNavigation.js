@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {Button} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import Vault from '../screens/MainScreen';
@@ -9,9 +8,7 @@ import AddSite from '../screens/AddSiteScreen';
 import Flatlist from '../components/FlatlistComponents.';
 import Details from '../screens/DetailsScreen';
 import {HeaderOption} from '../components/Headers';
-import {HeaderMainscreen} from '../components/Headers';
 import Edit from '../screens/EditScreen';
-import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -58,13 +55,6 @@ const StackNav = () => {
               backgroundColor: '#0E85FF',
             },
             headerBackTitleVisible: false,
-            // headerRight: () => (
-            //   <Button
-            //     onPress = {() => navigation.navigate('EditSite', {siteData})}
-            //     title="Edit"
-            //     color="#ffffff"
-            //   />
-            // ),
           })}
         />
       </Stack.Navigator>

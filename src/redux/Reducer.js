@@ -63,7 +63,7 @@ export const siteSlice = createSlice({
   reducers: {
     addSite: (state, action) => {
       state.value.push(action.payload);
-      state.filterValue.push(action.payload)
+      state.filterValue.push(action.payload);
     },
     editSite: (state, action) => {
       state.value.map(site => {

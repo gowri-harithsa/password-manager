@@ -2,15 +2,12 @@ import {React, useRef} from 'react';
 import {TextInput, View, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-
 const SearchField = ({onChangeText}) => {
-
   return (
     <View style={styles.SectionStyle}>
       <TextInput
         placeholder="Type Keywords to search"
-        onChangeText={onChangeText}>
-        </TextInput>
+        onChangeText={onChangeText}></TextInput>
       <Icon name="arrow-right" size={25} color="#0E85FF" />
     </View>
   );
