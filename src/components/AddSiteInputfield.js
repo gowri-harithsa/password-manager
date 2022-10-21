@@ -2,17 +2,6 @@ import {React, useState} from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-export const AddInput = props => {
-  return (
-    <View>
-      <View style={styles.container}>
-        <Text style={styles.title}>{props.title}</Text>
-        <TextInput style={styles.textInput} />
-      </View>
-    </View>
-  );
-};
-
 export const AddInputMultiline = props => {
   return (
     <View>
@@ -30,7 +19,7 @@ export const AddInputMultiline = props => {
   );
 };
 
-export const AddSitesInput = props => {
+export const AddSiteInput = props => {
   return (
     <View>
       <View style={styles.container}>

@@ -1,13 +1,13 @@
 import {React, useState} from 'react';
 import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {AddSitesInput} from '../components/AddSiteInputfield';
+import {AddSiteInput} from '../components/AddSiteInputfield';
 import {AddInputMultiline} from '../components/AddSiteInputfield';
 import {ResetBtn} from '../components/CustomButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {addSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
-import {DropDownInput} from '../components/DetailsInputField';
+import {DropDownInput} from '../components/DetailSiteInputField';
 import {AddPasswordInput} from '../components/AddSiteInputfield';
 
 const source = require('../assets/images/facebook.png');
@@ -71,14 +71,14 @@ const AddSite = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.viewAddInput}>
-          <AddSitesInput
+          <AddSiteInput
             title="URL"
             placeholder={'Enter Site URL'}
             value={url}
             onChangeText={value => setURL(value)}
             secureTextEntry={false}
           />
-          <AddSitesInput
+          <AddSiteInput
             title="Site Name"
             placeholder={'Enter Site Name'}
             value={siteName}
@@ -91,7 +91,7 @@ const AddSite = ({navigation}) => {
             setSelected={setSelected}
             values={selected}
           />
-          <AddSitesInput
+          <AddSiteInput
             title="User Name"
             placeholder={'Enter Username'}
             value={userName}

@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, Pressable, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AddInputMultiline} from '../components/AddSiteInputfield';
-import {DetailsInput} from '../components/DetailsInputField';
+import {DetailsInput} from '../components/DetailSiteInputField';
 import {useRoute} from '@react-navigation/native';
 import {ResetBtn} from '../components/CustomButton';
 import {Formik, Field} from 'formik';
@@ -11,7 +11,7 @@ const Details = ({navigation}) => {
 
   const route = useRoute();
   const src = require('../assets/images/facebook.png');
-
+  console.log('i am id', route.params.item.id)
   const siteData = route.params.item
 
   return (

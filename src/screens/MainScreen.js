@@ -9,22 +9,23 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Flatlist from '../components/FlatlistComponents.';
-import Header from '../components/HeaderBar';
+import { HeaderMainScreen } from '../components/Headers';
 import SearchField from '../components/SearchField';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {filterSite} from '../redux/Reducer';
 
 const Vault = ({navigation}) => {
+  const siteDetails = useSelector(state => state.siteDetail.value)
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-
+  console.log('i am data',siteDetails )
   const handleAdd = () => {
     navigation.navigate('AddSite');
   };
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header onPress={() => setClicked(!clicked)} />
+      <HeaderMainScreen onPress={() => setClicked(!clicked)} />
       {clicked ? (
         <SearchField onChangeText={text => dispatch(filterSite(text))} />
       ) : (

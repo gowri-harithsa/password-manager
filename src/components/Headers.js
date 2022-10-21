@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import React, {Component} from 'react';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 
 export const HeaderOption = () => {
   return {
@@ -17,20 +17,9 @@ export const HeaderOption = () => {
   };
 };
 
-export const HeaderMainscreen = () => {
-  const [Clicked, setClicked] = useState(true);
-  const handlesearch = () => {
-    setClicked(false);
-  };
-
-  return {
-    title: ' ',
-    headerStyle: {
-      backgroundColor: '#0E85FF',
-    },
-    headerTintColor: '#FFFFFF',
-    headerBackTitleVisible: false,
-    headerLeft: () => (
+export const HeaderMainScreen = ({onPress}) => {
+  return (
+    <View style={styles.header}>
       <View style={styles.headerMenu}>
         <Image source={require('../assets/images/burger_menu.png')} />
         <Image
@@ -38,15 +27,15 @@ export const HeaderMainscreen = () => {
           style={styles.content}
         />
       </View>
-    ),
-    headerRight: () => (
       <View style={styles.headerIcons}>
-        <TouchableOpacity onPress={handlesearch}>
-          <Image
-            source={require('../assets/images/search.png')}
-            style={styles.contentIcon}
-          />
-        </TouchableOpacity>
+        <View>
+          <TouchableOpacity onPress={onPress}>
+            <Image
+              source={require('../assets/images/search.png')}
+              style={styles.contentIcon}
+            />
+          </TouchableOpacity>
+        </View>
         <Image
           source={require('../assets/images/sync_icn.png')}
           style={styles.contentIcon}
@@ -56,17 +45,27 @@ export const HeaderMainscreen = () => {
           style={styles.contentIcon}
         />
       </View>
-    ),
-  };
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-  contentIcon: {
-    marginLeft: 35,
-  },
-  headerIcons: {
-    alignItems: 'center',
+  header: {
+    width: '100%',
+    height: 60,
+    backgroundColor: '#0E85FF',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    shadowColor: 'grey',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowRadius: 5,
+    shadowOpacity: 0.9,
+    padding: 10,
   },
   headerMenu: {
     alignItems: 'center',
@@ -75,4 +74,13 @@ const styles = StyleSheet.create({
   content: {
     marginLeft: 25,
   },
+  contentIcon: {
+    marginLeft: 35,
+  },
+  headerIcons: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
 });

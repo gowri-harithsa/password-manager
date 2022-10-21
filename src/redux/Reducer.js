@@ -84,7 +84,7 @@ export const siteSlice = createSlice({
     },
     deleteSite: (state, action) => {
       state.value = state.value.filter(site => site.id !== action.payload.id)
-      state.value = state.filterValue.filter(site => site.id !== action.payload.id)
+      // state.value = state.filterValue.filter(site => site.id !== action.payload.id)
     }
   },
 });

@@ -5,10 +5,10 @@ import {AddInputMultiline} from '../components/AddSiteInputfield';
 import {useRoute} from '@react-navigation/native';
 import {ResetBtn} from '../components/CustomButton';
 import {useDispatch} from 'react-redux';
-import {DetailsInput} from '../components/DetailsInputField';
+import {DetailsInput} from '../components/DetailSiteInputField';
 import {Formik, Field} from 'formik';
 import {editSite} from '../redux/Reducer';
-import {DropDownInput} from '../components/DetailsInputField';
+import {DropDownInput} from '../components/DetailSiteInputField';
 
 const Edit = ({navigation}) => {
   const route = useRoute();
