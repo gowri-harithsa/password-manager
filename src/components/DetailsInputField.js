@@ -1,5 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet, TextInput} from 'react-native';
+import SelectList from 'react-native-dropdown-select-list';
 
 export const DetailsInput = props => {
   return (
@@ -17,6 +18,18 @@ export const DetailsInput = props => {
   );
 };
 
+export const DropDownInput = props => {
+  return (
+    <View>
+      <View style={styles.container}>
+        <Text style={styles.title}>{props.title}</Text>
+        <SelectList data={props.data} setSelected={props.setSelected} boxStyles={styles.dropDownBox} inputStyles={styles.dropDropInput} dropdownStyles={styles.dropDown} values={props.selected}/>
+
+      </View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
@@ -28,7 +41,7 @@ const styles = StyleSheet.create({
   },
   textInput: {
     height: 41,
-    width: 321,
+    width: '80%',
     borderColor: '#D7D7D7',
     backgroundColor: '#F5F7FB',
     borderRadius: 4,
@@ -49,5 +62,31 @@ const styles = StyleSheet.create({
     fontSize: 16,
     marginHorizontal: 20,
     marginVertical: 10.5,
+  },
+  dropDownBox: {
+    height: 41,
+    width: '85%',
+    borderColor: '#D7D7D7',
+    backgroundColor: '#F5F7FB',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginHorizontal: 20,
+    marginVertical: 10.5,
+    padding: 10,
+  },
+  dropDropInput: {
+    fontSize: 13,
+    fontWeight: '200',
+    color: 'bol',
+  },
+  dropDown: {
+    width: '85%',
+    borderColor: '#D7D7D7',
+    backgroundColor: '#F5F7FB',
+    borderRadius: 4,
+    borderWidth: 1,
+    marginHorizontal: 20,
+    marginVertical: 10.5,
+    padding: 10,
   },
 });

@@ -34,13 +34,13 @@ const styles = StyleSheet.create({
   },
   btn: {
     width: 134,
-    height: 44,
     alignItems: 'center',
     paddingVertical: 9,
     borderRadius: 4,
     elevation: 3,
     backgroundColor: 'white',
-    marginTop: 20,
+    margin: 10,
+    marginVertical: 40,
   },
   resetText: {
     color: 'white',

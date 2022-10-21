@@ -1,12 +1,12 @@
 import {React, useState} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, ScrollView} from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {SignInBtn} from '../components/CustomButton';
 import Input from '../components/InputField';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/Feather';
-
+import { AddSignInInput } from '../components/InputField';
 
 const signUpValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -26,69 +26,60 @@ const signUpValidationSchema = yup.object().shape({
 
 const Login = ({navigation}) => {
 
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [icon, setIcon] = useState('eye');
-
   return (
     <>
-      <View style={styles.container}>
-        <Formik
-          validationSchema={signUpValidationSchema}
-          initialValues={{
-            mobileNumber: '',
-            mpin: '',
-            confirmMpin: '',
-          }}
-          onSubmit={async values => {
-            console.log(values);
-            try {
-              const jsonValue = JSON.stringify(values);
-              await AsyncStorage.setItem(values.mobileNumber, jsonValue);
-              alert('Added Succesfully');
-              navigation.navigate('Sign In');
-            } catch (err) {
-              console.log(err);
-            }
-          }}>
-          {({handleSubmit, isValid}) => (
-            <>
-              <Field
-                component={Input}
-                name="mobileNumber"
-                placeholder="Mobile Number"
-                keyboardType="numeric"
-              />
-              <Field
-                component={Input}
-                name="mpin"
-                placeholder="Mpin"
-                keyboardType="numeric"
-              />
-              <Field
-                component={Input}
-                name="confirmMpin"
-                placeholder="Confirm Mpin"
-                keyboardType="numeric"
-                secureTextEntry={secureTextEntry}
-              />
-              <Icon
-                name={icon}
-                size={25}
-                onPress={() => {
-                  setSecureTextEntry(!secureTextEntry);
-                  secureTextEntry ? setIcon('eye') : setIcon('eye-off');
-                }}
-                style={styles.imageIcon}
-              />
-              <SignInBtn
-                onPress={handleSubmit}
-                label="SIGN UP"
-                disabled={!isValid}
-              />
-            </>
-          )}
-        </Formik>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Formik
+            validationSchema={signUpValidationSchema}
+            initialValues={{
+              mobileNumber: '',
+              mpin: '',
+              confirmMpin: '',
+            }}
+            onSubmit={async values => {
+              console.log(values);
+              try {
+                const jsonValue = JSON.stringify(values);
+                await AsyncStorage.setItem(values.mobileNumber, jsonValue);
+                alert('Added Succesfully');
+                navigation.navigate('Sign In');
+              } catch (err) {
+                console.log(err);
+              }
+            }}>
+            {({handleSubmit, isValid}) => (
+              <>
+                <Field
+                  component={Input}
+                  name="mobileNumber"
+                  placeholder="Mobile Number"
+                  keyboardType="numeric"
+                />
+                <Field
+                  component={Input}
+                  name="mpin"
+                  placeholder="Mpin"
+                  keyboardType="numeric"
+                />
+                <Field
+                  component={AddSignInInput}
+                  name="confirmMpin"
+                  placeholder="Confirm Mpin"
+                  keyboardType="numeric"
+                />
+                <View style={styles.secContainer}>
+                  <SignInBtn
+                    onPress={handleSubmit}
+                    label="SIGN UP"
+                    disabled={!isValid}
+                  />
+                </View>
+              </>
+            )}
+          </Formik>
+        </View>
+      </ScrollView>
     </>
   );
 };
@@ -104,6 +95,9 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     marginVertical: 21,
+  },
+  secContainer: {
+    margin: 10,
   },
   textInput: {
     height: 54,

@@ -21,10 +21,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     height: 55,
-    width: 390,
+    width: '100%',
     borderRadius: 4,
     justifyContent: 'space-between',
     fontWeight: 'bold',
-    padding: 5,
+    paddingEnd: 5,
+    paddingStart: 10
   },
 });

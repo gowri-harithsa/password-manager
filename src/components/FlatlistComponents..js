@@ -1,16 +1,22 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Pressable, FlatList} from 'react-native';
-import {useSelector} from 'react-redux';
+import {View, Text, StyleSheet, Image, Pressable, FlatList, ToastAndroid} from 'react-native';
+import {useSelector, useDispatch} from 'react-redux';
+import {deleteSite} from '../redux/Reducer';
+import Toast from 'react-native-simple-toast';
 
 const Flatlist = ({navigation}) => {
   const siteData = useSelector(state => state.siteDetail.value);
+  const dispatch = useDispatch();
   return (
     <View>
       <FlatList
         data={siteData}
         renderItem={({item}) => (
           <Pressable
-            onPress={() => navigation.navigate('Site Details', {item})}>
+            onPress={() => navigation.navigate('Site Details', {item})}
+            onLongPress={() => {
+              dispatch(deleteSite({id: item.id}))
+              Toast.show(`Deleted ${item.name} succesfully`)}}>
             <View style={styles.flatList}>
               <View style={styles.viewImageNames}>
                 <Image source={item.src} style={styles.image} />

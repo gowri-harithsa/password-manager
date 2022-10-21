@@ -11,14 +11,13 @@ import {
 import Flatlist from '../components/FlatlistComponents.';
 import Header from '../components/HeaderBar';
 import SearchField from '../components/SearchField';
-import { useDispatch } from 'react-redux';
-import { filterSite } from '../redux/Reducer';
+import {useDispatch} from 'react-redux';
+import {filterSite} from '../redux/Reducer';
 
 const Vault = ({navigation}) => {
-
   const [clicked, setClicked] = useState(false);
-  const dispatch = useDispatch()
-  
+  const dispatch = useDispatch();
+
   const handleAdd = () => {
     navigation.navigate('AddSite');
   };
@@ -27,19 +26,21 @@ const Vault = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <Header onPress={() => setClicked(!clicked)} />
       {clicked ? (
-        <SearchField onChangeText={text => dispatch(filterSite(text))}/>
+        <SearchField onChangeText={text => dispatch(filterSite(text))} />
       ) : (
         <>
           <View style={styles.siteMenu}>
             <Text style={styles.siteText}>Sites</Text>
-            <Text style={styles.socialText}>Social Media</Text>
-            <Pressable style={styles.ovalButton} disabled={true}>
-              <Text style={styles.ovalText}>07</Text>
-            </Pressable>
-            <Image
-              source={require('../assets/images/thumbnailWhite.png')}
-              style={styles.thumbnail}
-            />
+            <View style={styles.iconView}>
+              <Text style={styles.socialText}>Social Media</Text>
+              <Pressable style={styles.ovalButton} disabled={true}>
+                <Text style={styles.ovalText}>07</Text>
+              </Pressable>
+              <Image
+                source={require('../assets/images/thumbnailWhite.png')}
+                style={styles.thumbnail}
+              />
+            </View>
           </View>
           <View style={styles.borderBottom}></View>
         </>
@@ -66,6 +67,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginVertical: 22,
     borderBottomColor: '#FFA136',
+    justifyContent: 'space-between',
+  },
+  iconView: {
+    flexDirection: 'row', 
+    paddingEnd: 10,
   },
   siteText: {
     height: 33,
@@ -73,7 +79,7 @@ const styles = StyleSheet.create({
     color: '#3C4857',
     fontSize: 24,
     fontWeight: '600',
-    lineHeight: 33,
+    lineHeight: 33, 
     marginLeft: 15,
   },
   socialText: {

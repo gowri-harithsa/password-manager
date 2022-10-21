@@ -7,15 +7,29 @@ import {ResetBtn} from '../components/CustomButton';
 import {useDispatch, useSelector} from 'react-redux';
 import {addSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
-import Icon from 'react-native-vector-icons/Feather';
+import {DropDownInput} from '../components/DetailsInputField';
+import {AddPasswordInput} from '../components/AddSiteInputfield';
 
 const source = require('../assets/images/facebook.png');
 
 const AddSite = ({navigation}) => {
-
+  const [selected, setSelected] = useState('');
+  const data = [
+    {
+      key: 'Social Media',
+      value: 'Social Media',
+    },
+    {
+      key: 'Shopping Apps',
+      value: 'Shopping Apps',
+    },
+    {
+      key: 'Photo Editing Apps',
+      value: 'Photo Editing Apps',
+    },
+  ];
   const siteData = useSelector(state => state.siteDetail.value);
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [icon, setIcon] = useState('eye');
+  const secureTextEntry = true;
   const [url, setURL] = useState();
   const [siteName, setsiteName] = useState();
   const [folder, setFolder] = useState();
@@ -32,7 +46,7 @@ const AddSite = ({navigation}) => {
         notes: notes,
         sitePassword: sitePassword,
         url: url,
-        folder: folder,
+        folder: selected,
         username: userName,
         src: source,
       };
@@ -71,12 +85,11 @@ const AddSite = ({navigation}) => {
             onChangeText={value => setsiteName(value)}
             secureTextEntry={false}
           />
-          <AddSitesInput
+          <DropDownInput
             title="Sector/Folder"
-            placeholder={'Enter folder Name'}
-            value={folder}
-            onChangeText={value => setFolder(value)}
-            secureTextEntry={false}
+            data={data}
+            setSelected={setSelected}
+            values={selected}
           />
           <AddSitesInput
             title="User Name"
@@ -85,21 +98,12 @@ const AddSite = ({navigation}) => {
             onChangeText={value => setUserName(value)}
             secureTextEntry={false}
           />
-          <AddSitesInput
+          <AddPasswordInput
             title="Site Password"
             placeholder={'Enter Password'}
             value={sitePassword}
             onChangeText={value => setPassword(value)}
             secureTextEntry={secureTextEntry}
-          />
-          <Icon
-            name={icon}
-            size={20}
-            onPress={() => {
-              setSecureTextEntry(!secureTextEntry);
-              secureTextEntry ? setIcon('eye') : setIcon('eye-off');
-            }}
-            style={styles.imageIcon}
           />
           <AddInputMultiline
             title="Notes"
@@ -115,6 +119,7 @@ const AddSite = ({navigation}) => {
         <ResetBtn label="Save" onPress={handleSave} />
       </View>
     </SafeAreaView>
+
   );
 };
 
@@ -133,8 +138,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
   },
-  imageIcon: {
-    marginLeft: 290,
-    marginTop: -40,
+  passContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    width: '85%',
   },
 });

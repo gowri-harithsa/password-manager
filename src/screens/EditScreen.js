@@ -1,4 +1,4 @@
-import {React} from 'react';
+import {React, useState} from 'react';
 import {View, Text, StyleSheet, ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {AddInputMultiline} from '../components/AddSiteInputfield';
@@ -8,12 +8,28 @@ import {useDispatch} from 'react-redux';
 import {DetailsInput} from '../components/DetailsInputField';
 import {Formik, Field} from 'formik';
 import {editSite} from '../redux/Reducer';
+import {DropDownInput} from '../components/DetailsInputField';
 
 const Edit = ({navigation}) => {
   const route = useRoute();
   const dispatch = useDispatch();
   const siteid = route.params.siteData.id;
   const src = require('../assets/images/facebook.png');
+  const [selected, setSelected] = useState('');
+  const data = [
+    {
+      key: 'Social Media',
+      value: 'Social Media',
+    },
+    {
+      key: 'Shopping Apps',
+      value: 'Shopping Apps',
+    },
+    {
+      key: 'Photo Editing Apps',
+      value: 'Photo Editing Apps',
+    },
+  ];
 
   return (
     <SafeAreaView style={styles.container}>
@@ -34,7 +50,7 @@ const Edit = ({navigation}) => {
                 id: siteid,
                 url: values.url,
                 name: values.siteName,
-                folder: values.folder,
+                folder: selected,
                 username: values.userName,
                 sitePassword: values.password,
                 notes: values.notes,
@@ -62,12 +78,14 @@ const Edit = ({navigation}) => {
                   value={values.siteName}
                 />
                 <Field
-                  component={DetailsInput}
+                  component={DropDownInput}
                   name="folder"
                   placeholder="Folder"
                   title="Sector/Folder"
-                  onChangeText={handleChange('folder')}
-                  value={values.folder}
+                  // onChangeText={handleChange('folder')}
+                  data={data}
+                  setSelected={setSelected}
+                  values={selected}
                 />
                 <Field
                   component={DetailsInput}

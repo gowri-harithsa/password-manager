@@ -1,12 +1,12 @@
 import {React, useState} from 'react';
-import {View, Image, StyleSheet, Text} from 'react-native';
+import {View, Image, StyleSheet, Text, ScrollView} from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {SignInBtn} from '../components/CustomButton';
 import Input from '../components/InputField';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-simple-toast';
-import Icon from 'react-native-vector-icons/Feather';
+import { AddSignInInput } from '../components/InputField';
 
 const signUpValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -21,8 +21,6 @@ const signUpValidationSchema = yup.object().shape({
 });
 
 const Register = ({navigation}) => {
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [icon, setIcon] = useState('eye');
 
   const handleSignIn = async values => {
     try {
@@ -50,56 +48,52 @@ const Register = ({navigation}) => {
 
   return (
     <>
-      <View style={styles.container}>
-        <Formik
-          validationSchema={signUpValidationSchema}
-          initialValues={{
-            mobileNumber: '',
-            mpin: '',
-          }}
-          onSubmit={handleSignIn}>
-          {({handleSubmit, isValid}) => (
-            <>
-              <Field
-                component={Input}
-                name="mobileNumber"
-                placeholder="Mobile Number"
-                keyboardType="numeric"
-              />
-              <Field
-                component={Input}
-                name="mpin"
-                placeholder="Mpin"
-                keyboardType="numeric"
-                secureTextEntry={secureTextEntry}
-              />
-              <Icon
-                name={icon}
-                size={25}
-                onPress={() => {
-                  setSecureTextEntry(!secureTextEntry);
-                  secureTextEntry ? setIcon('eye') : setIcon('eye-off');
-                }}
-                style={styles.imageIcon}
-              />
-              <Text style={styles.textForgot}>Forgot your password?</Text>
-              <SignInBtn
-                onPress={handleSubmit}
-                label="SIGN IN"
-                disabled={!isValid}
-              />
-              <Image
-                source={require('../assets/images/fingerprintIcon.png')}
-                style={styles.imageFingerprint}
-              />
-              <View style={styles.viewFingerprint}>
-                <Text style={styles.or}>OR</Text>
-                <Text style={styles.option}>USE YOUR FINGERPRINT TO LOGIN</Text>
-              </View>
-            </>
-          )}
-        </Formik>
-      </View>
+      <ScrollView>
+        <View style={styles.container}>
+          <Formik
+            validationSchema={signUpValidationSchema}
+            initialValues={{
+              mobileNumber: '',
+              mpin: '',
+            }}
+            onSubmit={handleSignIn}>
+            {({handleSubmit, isValid, values}) => (
+              <>
+                <Field
+                  component={Input}
+                  name="mobileNumber"
+                  placeholder="Mobile Number"
+                  keyboardType="numeric"
+                />
+                <Field
+                  component={AddSignInInput}
+                  name="mpin"
+                  placeholder="Mpin"
+                  keyboardType="numeric"
+                />
+                <View style={styles.secContainer}>
+                  <Text style={styles.textForgot}>Forgot your password?</Text>
+                  <SignInBtn
+                    onPress={handleSubmit}
+                    label="SIGN IN"
+                    disabled={!isValid}
+                  />
+                </View>
+                <Image
+                  source={require('../assets/images/fingerprintIcon.png')}
+                  style={styles.imageFingerprint}
+                />
+                <View style={styles.viewFingerprint}>
+                  <Text style={styles.or}>OR</Text>
+                  <Text style={styles.option}>
+                    USE YOUR FINGERPRINT TO LOGIN
+                  </Text>
+                </View>
+              </>
+            )}
+          </Formik>
+        </View>
+      </ScrollView>
     </>
   );
 };
@@ -110,11 +104,17 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'column',
     marginVertical: 43,
+    margin: 20
+
+  },
+  secContainer: {
+    margin: 10,
   },
   textForgot: {
     color: 'white',
     fontWeight: 'bold',
-    marginVertical: 40,
+    marginVertical: 10,
+    margin: 10,
   },
   textInput: {
     height: 54,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
     width: 52.13,
     height: 54,
     alignSelf: 'center',
-    marginVertical: 60,
+    marginVertical: 20,
   },
   imageIcon: {
     marginTop: -53,
@@ -139,7 +139,8 @@ const styles = StyleSheet.create({
   },
   viewFingerprint: {
     flexDirection: 'row',
-    marginVertical: -40,
+    margin: 10,
+    justifyContent: 'center',
   },
   or: {
     fontWeight: 'bold',

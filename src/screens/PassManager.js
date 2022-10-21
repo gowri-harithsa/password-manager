@@ -28,8 +28,7 @@ const styles = StyleSheet.create({
   },
   imageLogo: {
     marginTop: 70,
-    marginLeft: 98,
-    marginRight: 83,
+    alignSelf: 'center'
   },
   tabView: {
     flex: 1,
@@ -38,7 +37,7 @@ const styles = StyleSheet.create({
     marginRight: 30,
     marginBottom: 34,
     height: 485,
-    width: 300,
+    width: '100%',
     alignSelf: 'center',
   },
 });
