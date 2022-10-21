@@ -1,6 +1,5 @@
 import Reducer from './redux/Reducer';
 import {configureStore} from '@reduxjs/toolkit';
-import storage from 'redux-persist/lib/storage';
 import {persistReducer, persistStore} from 'redux-persist';
 import {combineReducers} from '@reduxjs/toolkit';
 import AsyncStorage from '@react-native-async-storage/async-storage';

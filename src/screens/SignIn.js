@@ -6,6 +6,7 @@ import {SignInBtn} from '../components/CustomButton';
 import Input from '../components/InputField';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/Feather';
 
 const signUpValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -20,6 +21,33 @@ const signUpValidationSchema = yup.object().shape({
 });
 
 const Register = ({navigation}) => {
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye');
+
+  const handleSignIn = async values => {
+    try {
+      const jsonValue = await AsyncStorage.getItem(values.mobileNumber);
+      if (jsonValue != null) {
+        parseValue = JSON.parse(jsonValue);
+
+        if (
+          values.mobileNumber === parseValue.mobileNumber &&
+          values.mpin === parseValue.mpin
+        ) {
+          Toast.show(
+            `Congrats!!! Success \n Signin to access the vault`,
+            Toast.SHORT,
+          );
+          navigation.navigate('Home');
+        } else {
+          alert('Enter Correct Mobile Number and MPin');
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -29,29 +57,7 @@ const Register = ({navigation}) => {
             mobileNumber: '',
             mpin: '',
           }}
-          onSubmit={async values => {
-            try {
-              const jsonValue = await AsyncStorage.getItem(values.mobileNumber);
-              if (jsonValue != null) {
-                parseValue = JSON.parse(jsonValue);
-
-                if (
-                  values.mobileNumber === parseValue.mobileNumber &&
-                  values.mpin === parseValue.mpin
-                ) {
-                  Toast.show(
-                    `Congrats!!! Success \n Signin to access the vault`,
-                    Toast.SHORT,
-                  );
-                  navigation.navigate('Home');
-                } else {
-                  alert('Enter Correct Mobile Number and MPin');
-                }
-              }
-            } catch (err) {
-              console.log(err);
-            }
-          }}>
+          onSubmit={handleSignIn}>
           {({handleSubmit, isValid}) => (
             <>
               <Field
@@ -65,7 +71,16 @@ const Register = ({navigation}) => {
                 name="mpin"
                 placeholder="Mpin"
                 keyboardType="numeric"
-                secureTextEntry="true"
+                secureTextEntry={secureTextEntry}
+              />
+              <Icon
+                name={icon}
+                size={25}
+                onPress={() => {
+                  setSecureTextEntry(!secureTextEntry);
+                  secureTextEntry ? setIcon('eye') : setIcon('eye-off');
+                }}
+                style={styles.imageIcon}
               />
               <Text style={styles.textForgot}>Forgot your password?</Text>
               <SignInBtn
@@ -99,7 +114,7 @@ const styles = StyleSheet.create({
   textForgot: {
     color: 'white',
     fontWeight: 'bold',
-    marginVertical: 21,
+    marginVertical: 40,
   },
   textInput: {
     height: 54,
@@ -117,6 +132,10 @@ const styles = StyleSheet.create({
     height: 54,
     alignSelf: 'center',
     marginVertical: 60,
+  },
+  imageIcon: {
+    marginTop: -53,
+    marginLeft: 260,
   },
   viewFingerprint: {
     flexDirection: 'row',

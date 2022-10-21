@@ -1,10 +1,12 @@
-import React from 'react';
+import {React, useState} from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Formik, Field} from 'formik';
 import * as yup from 'yup';
 import {SignInBtn} from '../components/CustomButton';
 import Input from '../components/InputField';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import Icon from 'react-native-vector-icons/Feather';
+
 
 const signUpValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -23,6 +25,10 @@ const signUpValidationSchema = yup.object().shape({
 });
 
 const Login = ({navigation}) => {
+
+  const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [icon, setIcon] = useState('eye');
+
   return (
     <>
       <View style={styles.container}>
@@ -63,7 +69,16 @@ const Login = ({navigation}) => {
                 name="confirmMpin"
                 placeholder="Confirm Mpin"
                 keyboardType="numeric"
-                secureTextEntry="true"
+                secureTextEntry={secureTextEntry}
+              />
+              <Icon
+                name={icon}
+                size={25}
+                onPress={() => {
+                  setSecureTextEntry(!secureTextEntry);
+                  secureTextEntry ? setIcon('eye') : setIcon('eye-off');
+                }}
+                style={styles.imageIcon}
               />
               <SignInBtn
                 onPress={handleSubmit}
@@ -128,5 +143,9 @@ const styles = StyleSheet.create({
   error: {
     fontSize: 10,
     color: 'red',
+  },
+  imageIcon: {
+    marginTop: -53,
+    marginLeft: 260,
   },
 });

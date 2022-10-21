@@ -6,34 +6,85 @@ import {DetailsInput} from '../components/DetailsInputField';
 import {useRoute} from '@react-navigation/native';
 import {useSelector} from 'react-redux';
 import {ResetBtn} from '../components/CustomButton';
+import {Formik, Field, validateYupSchema} from 'formik';
 
 const Details = ({navigation}) => {
-  const siteData = useSelector(state => state.siteDetail.value);
 
   const route = useRoute();
+  const src = require('../assets/images/facebook.png');
+
+  const siteData = route.params.item
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.viewAddInput}>
-          <DetailsInput title="URL" value={route.params.item.url} />
-          <DetailsInput title="Site Name" value={route.params.item.name} />
-          <DetailsInput
-            title="Sector/Folder"
-            value={route.params.item.folder}
-          />
-          <DetailsInput title="User Name" value={route.params.item.username} />
-          <DetailsInput
-            title="Site Password"
-            value={route.params.item.sitePassword}
-          />
-          <AddInputMultiline title="Notes" value={route.params.item.notes} />
-        </View>
-        <View style={styles.viewBtn}>
-          <ResetBtn
-            label="Edit"
-            onPress={() => navigation.navigate('EditSite', {siteData})}
-          />
+          <Formik
+            initialValues={{
+              url: route.params.item.url,
+              siteName: '',
+              folder: '',
+              userName: '',
+              password: '',
+              notes: '',
+              src: src
+            }}>
+            {({handleSubmit, isValid, values}) => (
+              <>
+                <Field
+                  component={DetailsInput}
+                  name="url"
+                  placeholder="URL"
+                  title="URL"
+                  value={values.url}
+                />
+                <Field
+                  component={DetailsInput}
+                  name="siteName"
+                  placeholder="Site Name"
+                  title="Site Name"
+                  value={route.params.item.name}
+                />
+                <Field
+                  component={DetailsInput}
+                  name="folder"
+                  placeholder="Folder"
+                  title="Sector/Folder"
+                  value={route.params.item.folder}
+                />
+                <Field
+                  component={DetailsInput}
+                  name="userName"
+                  placeholder="user Name"
+                  title="User Name"
+                  value={route.params.item.username}
+                />
+                <Field
+                  component={DetailsInput}
+                  name="password"
+                  placeholder="Password"
+                  title="Site Password"
+                  value={route.params.item.sitePassword}
+                />
+                <Field
+                  component={AddInputMultiline}
+                  name="notes"
+                  placeholder="Notes"
+                  title="Notes"
+                  value={route.params.item.notes}
+                />
+                <View style={styles.viewBtn}>
+                  <ResetBtn
+                    label="Edit"
+                    onPress={() => {
+                      navigation.navigate('EditSite', {siteData});
+                      console.log(siteData.id);
+                    }}
+                  />
+                </View>
+              </>
+            )}
+          </Formik>
         </View>
       </ScrollView>
     </SafeAreaView>

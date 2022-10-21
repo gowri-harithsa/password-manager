@@ -16,7 +16,7 @@ export const AddInputMultiline = props => {
   return (
     <View>
       <View style={styles.container}>
-        <Text style={styles.title}>{props.title}</Text>
+        <Text style={styles.titleMulti}>{props.title}</Text>
         <TextInput
           style={styles.textMultiline}
           multiline={true}
@@ -39,6 +39,7 @@ export const AddSitesInput = props => {
           value={props.value}
           onChangeText={props.onChangeText}
           style={styles.textInput}
+          secureTextEntry={props.secureTextEntry}
         />
       </View>
     </View>
@@ -53,6 +54,12 @@ const styles = StyleSheet.create({
     color: '#949CA5',
     fontSize: 18,
     marginHorizontal: 20,
+  },
+  titleMulti: {
+    color: '#949CA5',
+    fontSize: 18,
+    marginHorizontal: 20,
+    marginVertical: 30
   },
   textInput: {
     height: 41,
@@ -78,7 +85,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     fontSize: 16,
     marginHorizontal: 20,
-    marginVertical: 10.5,
     padding: 10,
   },
 });

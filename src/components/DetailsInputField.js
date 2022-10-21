@@ -11,7 +11,6 @@ export const DetailsInput = props => {
           value={props.value}
           onChangeText={props.onChangeText}
           style={styles.textInput}
-          editable={false}
         />
       </View>
     </View>

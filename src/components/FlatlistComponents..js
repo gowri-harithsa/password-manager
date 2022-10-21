@@ -4,7 +4,6 @@ import {useSelector} from 'react-redux';
 
 const Flatlist = ({navigation}) => {
   const siteData = useSelector(state => state.siteDetail.value);
-  console.log('flat list', siteData);
   return (
     <View>
       <FlatList

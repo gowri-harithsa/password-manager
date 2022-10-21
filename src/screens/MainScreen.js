@@ -11,10 +11,14 @@ import {
 import Flatlist from '../components/FlatlistComponents.';
 import Header from '../components/HeaderBar';
 import SearchField from '../components/SearchField';
+import { useDispatch } from 'react-redux';
+import { filterSite } from '../redux/Reducer';
 
 const Vault = ({navigation}) => {
-  const [clicked, setClicked] = useState(false);
 
+  const [clicked, setClicked] = useState(false);
+  const dispatch = useDispatch()
+  
   const handleAdd = () => {
     navigation.navigate('AddSite');
   };
@@ -23,7 +27,7 @@ const Vault = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <Header onPress={() => setClicked(!clicked)} />
       {clicked ? (
-        <SearchField />
+        <SearchField onChangeText={text => dispatch(filterSite(text))}/>
       ) : (
         <>
           <View style={styles.siteMenu}>

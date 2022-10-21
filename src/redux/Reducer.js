@@ -9,7 +9,7 @@ const IMAGE_ICON = [facebook, youtube, twitter, instagram];
 
 const initialState = [
   {
-    id: '1',
+    id: 1,
     src: IMAGE_ICON[0],
     url: 'www.facebook.com',
     name: 'Facebook',
@@ -20,7 +20,7 @@ const initialState = [
     notes: '',
   },
   {
-    id: '2',
+    id: 2,
     src: IMAGE_ICON[1],
     url: 'www.youtube.com/ssmraok',
     name: 'YouTube',
@@ -31,7 +31,7 @@ const initialState = [
     notes: '',
   },
   {
-    id: '3',
+    id: 3,
     src: IMAGE_ICON[2],
     url: 'www.twitter.com',
     name: 'Twitter',
@@ -42,7 +42,7 @@ const initialState = [
     notes: '',
   },
   {
-    id: '4',
+    id: 4,
     src: IMAGE_ICON[3],
     url: 'www.instagram.com',
     name: 'Instagram',
@@ -58,15 +58,16 @@ export const siteSlice = createSlice({
   name: 'siteDetail',
   initialState: {
     value: initialState,
+    filterValue: initialState,
   },
   reducers: {
     addSite: (state, action) => {
       state.value.push(action.payload);
+      state.filterValue.push(action.payload)
     },
     editSite: (state, action) => {
       state.value.map(site => {
         if (site.id === action.payload.id) {
-          site.src = action.payload.src;
           site.url = action.payload.url;
           site.name = action.payload.name;
           site.folder = action.payload.folder;
@@ -76,8 +77,13 @@ export const siteSlice = createSlice({
         }
       });
     },
+    filterSite: (state, action) => {
+      state.value = state.filterValue.filter(site =>
+        site.name.toLowerCase().includes(action.payload.toLowerCase()),
+      );
+    },
   },
 });
 
-export const {addSite, editSite} = siteSlice.actions;
+export const {addSite, editSite, filterSite} = siteSlice.actions;
 export default siteSlice.reducer;
