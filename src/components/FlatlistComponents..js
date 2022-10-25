@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
@@ -6,17 +6,24 @@ import {
   Image,
   Pressable,
   FlatList,
-  ToastAndroid,
   TouchableOpacity,
 } from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {deleteSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Feather';
+import Clipboard from '@react-native-clipboard/clipboard';
+
 
 const Flatlist = ({navigation}) => {
+
   const siteData = useSelector(state => state.siteDetail.value);
   const dispatch = useDispatch();
+
+  const copyToClipboard = (password) => {
+    Clipboard.setString(password);
+  };
+
   return (
     <View>
       <FlatList
@@ -33,7 +40,7 @@ const Flatlist = ({navigation}) => {
                 <Image source={item.src} style={styles.image} />
                 <View style={styles.viewNameCopy}>
                   <Text style={styles.componentName}>{item.name}</Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={()=>copyToClipboard(item.sitePassword)}>
                     <Text style={styles.componentCopy}>
                       <Icon name="copy" size={15} />
                       {' Copy Password'}
