@@ -40,7 +40,6 @@ const styles = StyleSheet.create({
     elevation: 3,
     backgroundColor: 'white',
     margin: 10,
-    marginVertical: 40,
   },
   resetText: {
     color: 'white',
