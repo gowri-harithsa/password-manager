@@ -3,6 +3,7 @@ import {View, Text, StyleSheet, Image, Pressable, FlatList, ToastAndroid} from '
 import {useSelector, useDispatch} from 'react-redux';
 import {deleteSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/Feather';
 
 const Flatlist = ({navigation}) => {
   const siteData = useSelector(state => state.siteDetail.value);
@@ -22,7 +23,13 @@ const Flatlist = ({navigation}) => {
                 <Image source={item.src} style={styles.image} />
                 <View style={styles.viewNameCopy}>
                   <Text style={styles.componentName}>{item.name}</Text>
-                  <Text style={styles.componentCopy}>Copy Password</Text>
+                  <Text style={styles.componentCopy}>
+                    <Icon 
+                      name='copy'
+                      size= {15}
+                      />
+                      {' Copy Password'}
+                  </Text>
                 </View>
               </View>
               <View style={styles.viewURI}>

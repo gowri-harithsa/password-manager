@@ -81,7 +81,8 @@ export const SubHeader = () => {
             <TouchableOpacity
               onPress={() => {
                 handleFolders(folder);
-              }}>
+              }}
+              key = {folder}>
               <Text style={styles.dropdownText}>{folder}</Text>
             </TouchableOpacity>
           ))}
@@ -153,7 +154,9 @@ const styles = StyleSheet.create({
   },
   iconView: {
     flexDirection: 'row',
-    paddingEnd: 10,
+    paddingEnd: 20,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   siteText: {
     height: 33,
@@ -185,9 +188,9 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
+    textAlign: 'center',
   },
   thumbnail: {
-    marginVertical: 14,
     marginLeft: 7,
   },
   borderBottom: {
@@ -203,9 +206,12 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     alignSelf: 'flex-end',
     marginEnd: 15,
+    borderRadius: 5,
+    borderWidth: 0.2,
+    borderColor: '#0E85FF',
+    backgroundColor: '#FFFFFF'
   },
   dropdownText: {
-    borderWidth: 0.2,
     padding: 5,
   },
 });

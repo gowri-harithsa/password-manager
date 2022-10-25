@@ -38,7 +38,6 @@ const Login = ({navigation}) => {
               confirmMpin: '',
             }}
             onSubmit={async (values, {resetForm}) => {
-              console.log(values);
               try {
                 const jsonValue = JSON.stringify(values);
                 await AsyncStorage.setItem(values.mobileNumber, jsonValue);

@@ -11,7 +11,6 @@ const Details = ({navigation}) => {
 
   const route = useRoute();
   const src = require('../assets/images/facebook.png');
-  console.log('i am id', route.params.item.id)
   const siteData = route.params.item
 
   return (
@@ -77,7 +76,6 @@ const Details = ({navigation}) => {
                     label="Edit"
                     onPress={() => {
                       navigation.navigate('EditSite', {siteData});
-                      console.log(siteData.id);
                     }}
                   />
                 </View>

@@ -1,11 +1,9 @@
 import {React, useState} from 'react';
 import {
   View,
-  Text,
   StyleSheet,
   SafeAreaView,
   Image,
-  Pressable,
   TouchableOpacity,
 } from 'react-native';
 import Flatlist from '../components/FlatlistComponents.';
@@ -16,10 +14,9 @@ import {filterSite} from '../redux/Reducer';
 import {SubHeader} from '../components/Headers';
 
 const Vault = ({navigation}) => {
-  const siteDetails = useSelector(state => state.siteDetail.value);
+
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-  console.log('i am data', siteDetails);
   const handleAdd = () => {
     navigation.navigate('AddSite');
   };

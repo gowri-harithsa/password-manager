@@ -38,9 +38,9 @@ const Register = ({navigation}) => {
           );
           resetForm(initialValues='')
           navigation.navigate('Home');
-        } else {
-          alert('Enter Correct Mobile Number and MPin');
-        }
+        } 
+      }else {
+        alert('Enter Correct Mobile Number and MPin');
       }
     } catch (err) {
       console.log(err);
