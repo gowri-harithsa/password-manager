@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {filterDropDown} from '../redux/Reducer';
+import Modal from 'react-native-modal';
 
 export const HeaderOption = () => {
   return {
@@ -26,7 +27,12 @@ export const HeaderOption = () => {
   };
 };
 
-export const HeaderMainScreen = ({onPress}) => {
+export const HeaderMainScreen = ({onPress, navigation}) => {
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const handleToggle = () => {
+    setModalVisible(!isModalVisible);
+  };
   return (
     <View style={styles.header}>
       <View style={styles.headerMenu}>
@@ -45,15 +51,32 @@ export const HeaderMainScreen = ({onPress}) => {
             />
           </TouchableOpacity>
         </View>
-        <Image
-          source={require('../assets/images/sync_icn.png')}
-          style={styles.contentIcon}
-        />
+        <TouchableOpacity onPress={handleToggle}>
+          <Image
+            source={require('../assets/images/sync_icn.png')}
+            style={styles.contentIcon}
+          />
+        </TouchableOpacity>
         <Image
           source={require('../assets/images/profile.png')}
           style={styles.contentIcon}
         />
       </View>
+      <Modal
+        isVisible={isModalVisible}
+        coverScreen={true}
+        >
+        <TouchableOpacity style={styles.dataSyncContainer} onPress={handleToggle}>
+          <View style={styles.imageContainer}>
+            <Text style={styles.modalText}>Data Sync in Progress</Text>
+            <Text style={styles.modalText}>Please wait</Text>
+          </View>
+          <Image
+            source={require('../assets/images/dataSync.png')}
+            style={styles.dataSyncimage}
+          />
+        </TouchableOpacity>
+      </Modal>
     </View>
   );
 };
@@ -82,7 +105,7 @@ export const SubHeader = () => {
               onPress={() => {
                 handleFolders(folder);
               }}
-              key = {folder}>
+              key={folder}>
               <Text style={styles.dropdownText}>{folder}</Text>
             </TouchableOpacity>
           ))}
@@ -209,9 +232,27 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     borderWidth: 0.2,
     borderColor: '#0E85FF',
-    backgroundColor: '#FFFFFF'
+    backgroundColor: '#FFFFFF',
   },
   dropdownText: {
     padding: 5,
+  },
+  modalText: {
+    alignSelf: 'center',
+    color: '#FFFFFF',
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  dataSyncimage: {
+    alignSelf: 'center',
+    height: 40,
+    width: 42,
+  },
+  dataSyncContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  imageContainer: {
+    marginVertical: 33,
   },
 });

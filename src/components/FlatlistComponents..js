@@ -1,5 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Pressable, FlatList, ToastAndroid} from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  Pressable,
+  FlatList,
+  ToastAndroid,
+  TouchableOpacity,
+} from 'react-native';
 import {useSelector, useDispatch} from 'react-redux';
 import {deleteSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
@@ -16,20 +25,20 @@ const Flatlist = ({navigation}) => {
           <Pressable
             onPress={() => navigation.navigate('Site Details', {item})}
             onLongPress={() => {
-              dispatch(deleteSite({id: item.id}))
-              Toast.show(`Deleted ${item.name} succesfully`)}}>
+              dispatch(deleteSite({id: item.id}));
+              Toast.show(`Deleted ${item.name} succesfully`);
+            }}>
             <View style={styles.flatList}>
               <View style={styles.viewImageNames}>
                 <Image source={item.src} style={styles.image} />
                 <View style={styles.viewNameCopy}>
                   <Text style={styles.componentName}>{item.name}</Text>
-                  <Text style={styles.componentCopy}>
-                    <Icon 
-                      name='copy'
-                      size= {15}
-                      />
+                  <TouchableOpacity>
+                    <Text style={styles.componentCopy}>
+                      <Icon name="copy" size={15} />
                       {' Copy Password'}
-                  </Text>
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
               <View style={styles.viewURI}>
