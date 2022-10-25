@@ -9,16 +9,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Flatlist from '../components/FlatlistComponents.';
-import { HeaderMainScreen } from '../components/Headers';
+import {HeaderMainScreen} from '../components/Headers';
 import SearchField from '../components/SearchField';
 import {useDispatch, useSelector} from 'react-redux';
 import {filterSite} from '../redux/Reducer';
+import {SubHeader} from '../components/Headers';
 
 const Vault = ({navigation}) => {
-  const siteDetails = useSelector(state => state.siteDetail.value)
+  const siteDetails = useSelector(state => state.siteDetail.value);
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
-  console.log('i am data',siteDetails )
+  console.log('i am data', siteDetails);
   const handleAdd = () => {
     navigation.navigate('AddSite');
   };
@@ -29,22 +30,7 @@ const Vault = ({navigation}) => {
       {clicked ? (
         <SearchField onChangeText={text => dispatch(filterSite(text))} />
       ) : (
-        <>
-          <View style={styles.siteMenu}>
-            <Text style={styles.siteText}>Sites</Text>
-            <View style={styles.iconView}>
-              <Text style={styles.socialText}>Social Media</Text>
-              <Pressable style={styles.ovalButton} disabled={true}>
-                <Text style={styles.ovalText}>07</Text>
-              </Pressable>
-              <Image
-                source={require('../assets/images/thumbnailWhite.png')}
-                style={styles.thumbnail}
-              />
-            </View>
-          </View>
-          <View style={styles.borderBottom}></View>
-        </>
+        <SubHeader />
       )}
       <View style={styles.viewFlat}>
         <Flatlist navigation={navigation} />
@@ -63,53 +49,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FAFAFA',
-  },
-  siteMenu: {
-    flexDirection: 'row',
-    marginVertical: 22,
-    borderBottomColor: '#FFA136',
-    justifyContent: 'space-between',
-  },
-  iconView: {
-    flexDirection: 'row', 
-    paddingEnd: 10,
-  },
-  siteText: {
-    height: 33,
-    width: 55,
-    color: '#3C4857',
-    fontSize: 24,
-    fontWeight: '600',
-    lineHeight: 33, 
-    marginLeft: 15,
-  },
-  socialText: {
-    height: 33,
-    width: 113,
-    color: '#3C4857',
-    fontSize: 19.2,
-    lineHeight: 33,
-    marginLeft: 130,
-  },
-  ovalButton: {
-    height: 29.6,
-    width: 29.6,
-    borderRadius: 15,
-    backgroundColor: '#0E85FF',
-    marginLeft: 5,
-    paddingHorizontal: 4,
-    paddingVertical: 5,
-  },
-  ovalText: {
-    height: 22,
-    width: 19,
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  thumbnail: {
-    marginVertical: 10,
-    marginLeft: 7,
   },
   body: {
     width: '100%',
@@ -138,15 +77,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  borderBottom: {
-    borderBottomWidth: 4,
-    height: 3.2,
-    width: 30,
-    borderBottomColor: '#FFA136',
-    borderRadius: 1.6,
-    marginLeft: 17,
-    marginVertical: -14,
-  },
   viewFlat: {
     flex: 1,
     marginVertical: 10,
@@ -160,7 +90,6 @@ const styles = StyleSheet.create({
     right: 20,
     bottom: 40,
   },
-
   floatingButton: {
     resizeMode: 'contain',
     width: 48,

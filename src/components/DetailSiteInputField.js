@@ -78,6 +78,8 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '200',
     color: 'bol',
+    height: 20,
+    alignSelf: 'center'
   },
   dropDown: {
     width: '85%',

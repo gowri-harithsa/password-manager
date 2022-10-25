@@ -20,12 +20,8 @@ const AddSite = ({navigation}) => {
       value: 'Social Media',
     },
     {
-      key: 'Shopping Apps',
-      value: 'Shopping Apps',
-    },
-    {
-      key: 'Photo Editing Apps',
-      value: 'Photo Editing Apps',
+      key: 'Shopping Sites',
+      value: 'Shopping Sites',
     },
   ];
   const siteData = useSelector(state => state.siteDetail.value);

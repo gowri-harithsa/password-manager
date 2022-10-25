@@ -9,6 +9,7 @@ import {DetailsInput} from '../components/DetailSiteInputField';
 import {Formik, Field} from 'formik';
 import {editSite} from '../redux/Reducer';
 import {DropDownInput} from '../components/DetailSiteInputField';
+import Toast from 'react-native-simple-toast'
 
 const Edit = ({navigation}) => {
   const route = useRoute();
@@ -24,10 +25,6 @@ const Edit = ({navigation}) => {
     {
       key: 'Shopping Apps',
       value: 'Shopping Apps',
-    },
-    {
-      key: 'Photo Editing Apps',
-      value: 'Photo Editing Apps',
     },
   ];
 
@@ -45,7 +42,7 @@ const Edit = ({navigation}) => {
               notes: route.params.siteData.notes,
               src: route.params.siteData.src,
             }}
-            onSubmit={async values => {
+            onSubmit={async (values,) => {
               const obj = {
                 id: siteid,
                 url: values.url,
@@ -57,6 +54,7 @@ const Edit = ({navigation}) => {
                 src: src,
               };
               dispatch(editSite(obj));
+              Toast.show('Updated Succesfully!', Toast.SHORT)
               navigation.navigate('Home');
             }}>
             {({handleSubmit, isValid, values, handleChange}) => (

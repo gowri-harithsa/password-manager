@@ -58,7 +58,7 @@ export const AddPasswordInput = props => {
           size={18}
           onPress={() => {
             setSecureTextEntry(!secureTextEntry);
-            secureTextEntry ? setIcon('eye') : setIcon('eye-off');
+            secureTextEntry ? setIcon('eye-off') : setIcon('eye');
           }}
         />
         </View>

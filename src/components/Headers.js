@@ -1,5 +1,14 @@
-import React, {Component} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import React, {Component, useState} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Pressable,
+} from 'react-native';
+import {useDispatch, useSelector} from 'react-redux';
+import {filterDropDown} from '../redux/Reducer';
 
 export const HeaderOption = () => {
   return {
@@ -49,6 +58,60 @@ export const HeaderMainScreen = ({onPress}) => {
   );
 };
 
+export const SubHeader = () => {
+  const [visible, setVisible] = useState(false);
+  const [item, setItem] = useState('All');
+  const data = useSelector(state => state.siteDetail.value);
+  const dispatch = useDispatch();
+  const sitesFolder = ['All', 'Social Media', 'Shopping Sites'];
+
+  const setDropdown = () => {
+    setVisible(!visible);
+  };
+  const handleFolders = folder => {
+    setItem(folder);
+    dispatch(filterDropDown(folder));
+    setVisible(false);
+  };
+  const renderDropdown = () => {
+    if (visible) {
+      return (
+        <View style={styles.dropdownContainer}>
+          {sitesFolder.map(folder => (
+            <TouchableOpacity
+              onPress={() => {
+                handleFolders(folder);
+              }}>
+              <Text style={styles.dropdownText}>{folder}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      );
+    }
+  };
+  return (
+    <View>
+      <View style={styles.siteMenu}>
+        <Text style={styles.siteText}>Sites</Text>
+        <View style={styles.iconView}>
+          <Text style={styles.folderText}>{item}</Text>
+          <Pressable style={styles.ovalButton} disabled={true}>
+            <Text style={styles.ovalText}>0{data.length}</Text>
+          </Pressable>
+          <TouchableOpacity onPress={setDropdown}>
+            <Image
+              source={require('../assets/images/thumbnailWhite.png')}
+              style={styles.thumbnail}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.borderBottom}></View>
+      {renderDropdown()}
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   header: {
     width: '100%',
@@ -82,5 +145,67 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-
+  siteMenu: {
+    flexDirection: 'row',
+    marginVertical: 22,
+    borderBottomColor: '#FFA136',
+    justifyContent: 'space-between',
+  },
+  iconView: {
+    flexDirection: 'row',
+    paddingEnd: 10,
+  },
+  siteText: {
+    height: 33,
+    width: 55,
+    color: '#3C4857',
+    fontSize: 24,
+    fontWeight: '600',
+    lineHeight: 33,
+    marginLeft: 15,
+  },
+  folderText: {
+    height: 33,
+    color: '#3C4857',
+    fontSize: 18,
+    lineHeight: 33,
+    marginLeft: 130,
+  },
+  ovalButton: {
+    height: 31,
+    width: 31,
+    borderRadius: 15,
+    backgroundColor: '#0E85FF',
+    marginLeft: 5,
+    paddingHorizontal: 4,
+    paddingVertical: 5,
+  },
+  ovalText: {
+    height: 22,
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  thumbnail: {
+    marginVertical: 14,
+    marginLeft: 7,
+  },
+  borderBottom: {
+    borderBottomWidth: 4,
+    height: 3.2,
+    width: 30,
+    borderBottomColor: '#FFA136',
+    borderRadius: 1.6,
+    marginLeft: 17,
+    marginVertical: -14,
+  },
+  dropdownContainer: {
+    marginVertical: 20,
+    alignSelf: 'flex-end',
+    marginEnd: 15,
+  },
+  dropdownText: {
+    borderWidth: 0.2,
+    padding: 5,
+  },
 });

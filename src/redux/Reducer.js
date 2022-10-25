@@ -84,10 +84,20 @@ export const siteSlice = createSlice({
     },
     deleteSite: (state, action) => {
       state.value = state.value.filter(site => site.id !== action.payload.id)
-      // state.value = state.filterValue.filter(site => site.id !== action.payload.id)
+      state.filterValue = state.value
+    },
+    filterDropDown: (state, action) => {
+      if(action.payload == 'All'){
+        state.value= state.filterValue
+      }else{
+        state.value = state.filterValue.filter(site =>
+          site.folder.toLowerCase().includes(action.payload.toLowerCase()),
+        );
+      }
+
     }
   },
 });
 
-export const {addSite, editSite, filterSite, deleteSite} = siteSlice.actions;
+export const {addSite, editSite, filterSite, deleteSite, filterDropDown} = siteSlice.actions;
 export default siteSlice.reducer;

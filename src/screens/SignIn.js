@@ -22,7 +22,7 @@ const signUpValidationSchema = yup.object().shape({
 
 const Register = ({navigation}) => {
 
-  const handleSignIn = async values => {
+  const handleSignIn = async (values, {resetForm}) => {
     try {
       const jsonValue = await AsyncStorage.getItem(values.mobileNumber);
       if (jsonValue != null) {
@@ -36,6 +36,7 @@ const Register = ({navigation}) => {
             `Congrats!!! Success \n Signin to access the vault`,
             Toast.SHORT,
           );
+          resetForm(initialValues='')
           navigation.navigate('Home');
         } else {
           alert('Enter Correct Mobile Number and MPin');
