@@ -80,7 +80,6 @@ const Edit = ({navigation}) => {
                   name="folder"
                   placeholder="Folder"
                   title="Sector/Folder"
-                  // onChangeText={handleChange('folder')}
                   data={data}
                   setSelected={setSelected}
                   values={selected}

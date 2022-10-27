@@ -21,11 +21,15 @@ const Vault = ({navigation}) => {
     navigation.navigate('AddSite');
   };
 
+  const handleBack = () => {
+    setClicked(!clicked)
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <HeaderMainScreen onPress={() => setClicked(!clicked)} />
       {clicked ? (
-        <SearchField onChangeText={text => dispatch(filterSite(text))} />
+        <SearchField onChangeText={text => dispatch(filterSite(text))} onPress={handleBack} />
       ) : (
         <SubHeader />
       )}

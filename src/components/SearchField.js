@@ -1,14 +1,17 @@
-import {React, useRef} from 'react';
-import {TextInput, View, StyleSheet} from 'react-native';
+import {React, useRef, useState} from 'react';
+import {TextInput, View, StyleSheet, TouchableOpacity} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-const SearchField = ({onChangeText}) => {
+const SearchField = ({onChangeText, onPress}) => {
+  
   return (
     <View style={styles.SectionStyle}>
       <TextInput
         placeholder="Type Keywords to search"
         onChangeText={onChangeText}></TextInput>
-      <Icon name="arrow-right" size={25} color="#0E85FF" />
+      <TouchableOpacity onPress={onPress}>
+        <Icon name="arrow-right" size={25} color="#0E85FF" />
+      </TouchableOpacity>
     </View>
   );
 };
@@ -26,6 +29,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     fontWeight: 'bold',
     paddingEnd: 5,
-    paddingStart: 10
+    paddingStart: 15,
+    paddingEnd: 10,
+
   },
 });

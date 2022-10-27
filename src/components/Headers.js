@@ -33,6 +33,7 @@ export const HeaderMainScreen = ({onPress, navigation}) => {
   const handleToggle = () => {
     setModalVisible(!isModalVisible);
   };
+
   return (
     <View style={styles.header}>
       <View style={styles.headerMenu}>
@@ -195,7 +196,7 @@ const styles = StyleSheet.create({
     color: '#3C4857',
     fontSize: 18,
     lineHeight: 33,
-    marginLeft: 130,
+    marginRight: 5,
   },
   ovalButton: {
     height: 31,
@@ -205,6 +206,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     paddingHorizontal: 4,
     paddingVertical: 5,
+    marginRight: 5,
   },
   ovalText: {
     height: 22,
