@@ -56,6 +56,7 @@ export const AddPasswordInput = props => {
         <Icon
           name={icon}
           size={18}
+          color={'grey'}
           onPress={() => {
             setSecureTextEntry(!secureTextEntry);
             secureTextEntry ? setIcon('eye-off') : setIcon('eye');
@@ -108,7 +109,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     padding: 10,
     marginVertical: 10.5,
-
+    color: '#3C4858',
+    fontSize: 16,
   },
   passwordContainer: {
     flexDirection: 'row',

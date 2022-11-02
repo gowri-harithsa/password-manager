@@ -23,7 +23,7 @@ export const DropDownInput = props => {
     <View>
       <View style={styles.container}>
         <Text style={styles.title}>{props.title}</Text>
-        <SelectList data={props.data} setSelected={props.setSelected} boxStyles={styles.dropDownBox} inputStyles={styles.dropDropInput} dropdownStyles={styles.dropDown} values={props.selected}/>
+        <SelectList data={props.data} setSelected={props.setSelected} boxStyles={styles.dropDownBox} inputStyles={styles.dropDropInput} dropdownStyles={styles.dropDown} values={props.selected} placeholder={props.placeholder}/>
 
       </View>
     </View>
@@ -72,14 +72,16 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 20,
     marginVertical: 10.5,
-    padding: 10,
   },
   dropDropInput: {
-    fontSize: 13,
-    fontWeight: '200',
-    color: 'bol',
-    height: 20,
-    alignSelf: 'center'
+    height: 41,
+    width: '85%',
+    fontSize: 16,
+    paddingVertical: 10,
+    color: '#3C4858',
+    alignSelf: 'center',
+    marginHorizontal: -10,
+
   },
   dropDown: {
     width: '85%',
@@ -89,6 +91,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     marginHorizontal: 20,
     marginVertical: 10.5,
-    padding: 10,
+    // padding: 10,
   },
 });

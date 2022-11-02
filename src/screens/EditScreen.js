@@ -78,7 +78,7 @@ const Edit = ({navigation}) => {
                 <Field
                   component={DropDownInput}
                   name="folder"
-                  placeholder="Folder"
+                  placeholder={route.params.siteData.folder}
                   title="Sector/Folder"
                   data={data}
                   setSelected={setSelected}

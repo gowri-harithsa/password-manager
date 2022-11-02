@@ -84,7 +84,7 @@ export const siteSlice = createSlice({
     },
     deleteSite: (state, action) => {
       state.value = state.value.filter(site => site.id !== action.payload.id)
-      state.filterValue = state.value
+      state.filterValue = state.filterValue.filter(site => site.id !== action.payload.id)
     },
     filterDropDown: (state, action) => {
       if(action.payload == 'All'){
@@ -94,7 +94,6 @@ export const siteSlice = createSlice({
           site.folder.toLowerCase().includes(action.payload.toLowerCase()),
         );
       }
-
     }
   },
 });

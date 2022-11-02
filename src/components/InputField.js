@@ -58,6 +58,7 @@ export const AddSignInInput = props => {
       <Icon
           name={icon}
           size={18}
+          color={'grey'}
           onPress={() => {
             setSecureTextEntry(!secureTextEntry);
             secureTextEntry ? setIcon('eye') : setIcon('eye-off');

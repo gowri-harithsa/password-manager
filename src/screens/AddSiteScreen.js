@@ -9,6 +9,7 @@ import {addSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
 import {DropDownInput} from '../components/DetailSiteInputField';
 import {AddPasswordInput} from '../components/AddSiteInputfield';
+import uuid from 'react-native-uuid';
 
 const source = require('../assets/images/facebook.png');
 
@@ -37,7 +38,7 @@ const AddSite = ({navigation}) => {
   const handleSave = () => {
     if ((url, siteName, folder, userName, sitePassword, notes != null)) {
       const siteObj = {
-        id: siteData.length + 1,
+        id: uuid.v4(),
         name: siteName,
         notes: notes,
         sitePassword: sitePassword,
