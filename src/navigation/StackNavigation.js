@@ -9,6 +9,7 @@ import Flatlist from '../components/FlatlistComponents.';
 import Details from '../screens/DetailsScreen';
 import {HeaderOption} from '../components/Headers';
 import Edit from '../screens/EditScreen';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 const theme = {
@@ -18,45 +19,56 @@ const theme = {
 };
 
 const StackNav = () => {
+  const state = useSelector(state => state.userState.userState);
+
   return (
     <NavigationContainer theme={theme} onReady={() => RNBootSplash.hide()}>
       <Stack.Navigator>
-        <Stack.Screen
-          name="Register"
-          component={RegisterLogin}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Home"
-          component={Vault}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="FlatlistComponent"
-          component={Flatlist}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="AddSite"
-          component={AddSite}
-          options={HeaderOption}
-        />
-        <Stack.Screen name="EditSite" component={Edit} options={HeaderOption} />
+        {!state ? (
+          <Stack.Screen
+            name="Register"
+            component={RegisterLogin}
+            options={{headerShown: false}}
+          />
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={Vault}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="FlatlistComponent"
+              component={Flatlist}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="AddSite"
+              component={AddSite}
+              options={HeaderOption}
+            />
+            <Stack.Screen
+              name="EditSite"
+              component={Edit}
+              options={HeaderOption}
+            />
 
-        <Stack.Screen
-          name="Site Details"
-          component={Details}
-          options={({navigation}) => ({
-            headerTitleStyle: {
-              fontWeight: '600',
-            },
-            headerTintColor: '#ffffff',
-            headerStyle: {
-              backgroundColor: '#0E85FF',
-            },
-            headerBackTitleVisible: false,
-          })}
-        />
+            <Stack.Screen
+              name="Site Details"
+              component={Details}
+              options={({navigation}) => ({
+                headerTitleStyle: {
+                  fontWeight: '600',
+                },
+                headerTintColor: '#ffffff',
+                headerStyle: {
+                  backgroundColor: '#0E85FF',
+                },
+                headerBackTitleVisible: false,
+              })}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

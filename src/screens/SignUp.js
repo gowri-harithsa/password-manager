@@ -5,8 +5,9 @@ import * as yup from 'yup';
 import {SignInBtn} from '../components/CustomButton';
 import Input from '../components/InputField';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import Icon from 'react-native-vector-icons/Feather';
 import { AddSignInInput } from '../components/InputField';
+import { useDispatch, useSelector } from 'react-redux';
+import { incrementUserCount } from '../redux/UserCountSlice';
 
 const signUpValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -25,7 +26,8 @@ const signUpValidationSchema = yup.object().shape({
 });
 
 const Login = ({navigation}) => {
-
+  const userId = useSelector(state => state.userCount.value);
+  const dispatch = useDispatch();
   return (
     <>
       <ScrollView>
@@ -39,10 +41,16 @@ const Login = ({navigation}) => {
             }}
             onSubmit={async (values, {resetForm}) => {
               try {
-                const jsonValue = JSON.stringify(values);
+                const obj = {
+                  mobileNumber: values.mobileNumber,
+                  mpin: values.mpin,
+                  userId: userId,
+                }
+                const jsonValue = JSON.stringify(obj);
                 await AsyncStorage.setItem(values.mobileNumber, jsonValue);
                 alert('Added Succesfully');
-                resetForm(initialValues='')
+                resetForm(initialValues='');
+                dispatch(incrementUserCount());
                 navigation.navigate('Sign In');
               } catch (err) {
                 console.log(err);

@@ -25,7 +25,7 @@ const AddSite = ({navigation}) => {
       value: 'Shopping Sites',
     },
   ];
-  const siteData = useSelector(state => state.siteDetail.value);
+  const userId = useSelector(state => state.userId.userId)
   const secureTextEntry = true;
   const [url, setURL] = useState();
   const [siteName, setsiteName] = useState();
@@ -46,6 +46,7 @@ const AddSite = ({navigation}) => {
         folder: selected,
         username: userName,
         src: source,
+        userId: userId
       };
       dispatch(addSite(siteObj));
       Toast.show('added Successfully', Toast.LONG);

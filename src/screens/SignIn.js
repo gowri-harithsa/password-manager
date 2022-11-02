@@ -7,6 +7,9 @@ import Input from '../components/InputField';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-simple-toast';
 import { AddSignInInput } from '../components/InputField';
+import { useDispatch } from 'react-redux';
+import { assignUserId } from '../redux/UserIdSlice';
+import { changeUserState } from '../redux/UserStateSlice';
 
 const signUpValidationSchema = yup.object().shape({
   mobileNumber: yup
@@ -27,7 +30,7 @@ const Register = ({navigation}) => {
       const jsonValue = await AsyncStorage.getItem(values.mobileNumber);
       if (jsonValue != null) {
         parseValue = JSON.parse(jsonValue);
-
+        dispatch(assignUserId(parseValue));
         if (
           values.mobileNumber === parseValue.mobileNumber &&
           values.mpin === parseValue.mpin
@@ -37,7 +40,7 @@ const Register = ({navigation}) => {
             Toast.SHORT,
           );
           resetForm(initialValues='')
-          navigation.navigate('Home');
+          dispatch(changeUserState())
         } 
       }else {
         alert('Enter Correct Mobile Number and MPin');
@@ -46,6 +49,7 @@ const Register = ({navigation}) => {
       console.log(err);
     }
   };
+  const dispatch = useDispatch();
 
   return (
     <>

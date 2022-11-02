@@ -18,6 +18,7 @@ const initialState = [
     sitePassword: '123456',
     uri: 'accounts.facebook.com',
     notes: '',
+    userId: 1,
   },
   {
     id: 2,
@@ -29,6 +30,7 @@ const initialState = [
     sitePassword: '123456',
     uri: 'accounts.youtube.com',
     notes: '',
+    userId: 1,
   },
   {
     id: 3,
@@ -40,6 +42,7 @@ const initialState = [
     sitePassword: '123456',
     uri: 'accounts.twitter.com',
     notes: '',
+    userId: 2,
   },
   {
     id: 4,
@@ -51,22 +54,51 @@ const initialState = [
     sitePassword: '123456',
     uri: 'accounts.instagram.com',
     notes: '',
+    userId: 2,
   },
 ];
 
 export const siteSlice = createSlice({
   name: 'siteDetail',
   initialState: {
-    value: initialState,
-    filterValue: initialState,
+    allValues: initialState,
+    value: [],
+    filterValue: [],
   },
   reducers: {
+    getUserData: (state, action) => {
+      state.value = state.allValues.filter(item => {
+        return item.userId == action.payload;
+      });
+      state.filterValue = state.value;
+    },
     addSite: (state, action) => {
+      state.allValues.push(action.payload);
       state.value.push(action.payload);
       state.filterValue.push(action.payload);
     },
     editSite: (state, action) => {
       state.value.map(site => {
+        if (site.id === action.payload.id) {
+          site.url = action.payload.url;
+          site.name = action.payload.name;
+          site.folder = action.payload.folder;
+          site.username = action.payload.username;
+          site.sitePassword = action.payload.sitePassword;
+          site.notes = action.payload.notes;
+        }
+      });
+      state.filterValue.map(site => {
+        if (site.id === action.payload.id) {
+          site.url = action.payload.url;
+          site.name = action.payload.name;
+          site.folder = action.payload.folder;
+          site.username = action.payload.username;
+          site.sitePassword = action.payload.sitePassword;
+          site.notes = action.payload.notes;
+        }
+      });
+      state.allValues.map(site => {
         if (site.id === action.payload.id) {
           site.url = action.payload.url;
           site.name = action.payload.name;
@@ -85,6 +117,7 @@ export const siteSlice = createSlice({
     deleteSite: (state, action) => {
       state.value = state.value.filter(site => site.id !== action.payload.id)
       state.filterValue = state.filterValue.filter(site => site.id !== action.payload.id)
+      state.allValues = state.allValues.filter(site => site.id !== action.payload.id)
     },
     filterDropDown: (state, action) => {
       if(action.payload == 'All'){
@@ -98,5 +131,5 @@ export const siteSlice = createSlice({
   },
 });
 
-export const {addSite, editSite, filterSite, deleteSite, filterDropDown} = siteSlice.actions;
+export const {addSite, editSite, filterSite, deleteSite, filterDropDown, getUserData} = siteSlice.actions;
 export default siteSlice.reducer;

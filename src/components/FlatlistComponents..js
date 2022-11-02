@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -13,16 +13,21 @@ import {deleteSite} from '../redux/Reducer';
 import Toast from 'react-native-simple-toast';
 import Icon from 'react-native-vector-icons/Feather';
 import Clipboard from '@react-native-clipboard/clipboard';
-
+import { getUserData } from '../redux/Reducer';
 
 const Flatlist = ({navigation}) => {
 
   const siteData = useSelector(state => state.siteDetail.value);
+  const userId = useSelector(state => state.userId.userId);
   const dispatch = useDispatch();
 
   const copyToClipboard = (password) => {
     Clipboard.setString(password);
   };
+
+  useEffect(() => {
+    dispatch(getUserData(userId));
+  }, []);
 
   return (
     <View>

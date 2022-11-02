@@ -10,6 +10,7 @@ import {
 import {useDispatch, useSelector} from 'react-redux';
 import {filterDropDown} from '../redux/Reducer';
 import Modal from 'react-native-modal';
+import { changeUserState } from '../redux/UserStateSlice';
 
 export const HeaderOption = () => {
   return {
@@ -28,12 +29,16 @@ export const HeaderOption = () => {
 };
 
 export const HeaderMainScreen = ({onPress, navigation}) => {
+  const dispatch = useDispatch()
   const [isModalVisible, setModalVisible] = useState(false);
 
   const handleToggle = () => {
     setModalVisible(!isModalVisible);
   };
 
+  const handleLogout = () => {
+    dispatch(changeUserState())
+  }
   return (
     <View style={styles.header}>
       <View style={styles.headerMenu}>
@@ -58,16 +63,17 @@ export const HeaderMainScreen = ({onPress, navigation}) => {
             style={styles.contentIcon}
           />
         </TouchableOpacity>
-        <Image
-          source={require('../assets/images/profile.png')}
-          style={styles.contentIcon}
-        />
+        <TouchableOpacity onPress={handleLogout}>
+          <Image
+            source={require('../assets/images/profile.png')}
+            style={styles.contentIcon}
+          />
+        </TouchableOpacity>
       </View>
-      <Modal
-        isVisible={isModalVisible}
-        coverScreen={true}
-        >
-        <TouchableOpacity style={styles.dataSyncContainer} onPress={handleToggle}>
+      <Modal isVisible={isModalVisible} coverScreen={true}>
+        <TouchableOpacity
+          style={styles.dataSyncContainer}
+          onPress={handleToggle}>
           <View style={styles.imageContainer}>
             <Text style={styles.modalText}>Data Sync in Progress</Text>
             <Text style={styles.modalText}>Please wait</Text>
@@ -243,7 +249,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     color: '#FFFFFF',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   dataSyncimage: {
     alignSelf: 'center',
