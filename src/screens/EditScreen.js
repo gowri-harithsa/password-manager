@@ -23,8 +23,8 @@ const Edit = ({navigation}) => {
       value: 'Social Media',
     },
     {
-      key: 'Shopping Apps',
-      value: 'Shopping Apps',
+      key: 'Shopping Sites',
+      value: 'Shopping Sites',
     },
   ];
 

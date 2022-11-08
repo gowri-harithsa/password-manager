@@ -1,5 +1,4 @@
 import * as React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs';
 import Login from '../screens/SignUp';
 import Register from '../screens/SignIn';
@@ -16,13 +15,16 @@ const TabNav = () => {
           backgroundColor: '#FFA222',
           height: 4,
           borderRadius: 3.5,
+          marginStart: '15%',
           marginVertical: -6,
+          width: 35,
         },
         tabBarLabelStyle: {
           color: 'white',
           fontSize: 20,
           fontWeight: '600',
           letterSpacing: 1.2,
+          alignItems: 'center'
         },
       }}>
       <Tab.Screen name="Sign In" component={Register} />

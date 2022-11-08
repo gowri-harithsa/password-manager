@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageLogo: {
-    marginTop: 70,
+    marginTop: 40,
     alignSelf: 'center'
   },
   tabView: {

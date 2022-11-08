@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: 'red',
     margin: 10,
+    alignSelf: 'center'
   },
   errorInput: {
     borderColor: 'red',
